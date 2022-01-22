@@ -22,9 +22,9 @@ services:
   #docker run --name thingspeak -p 80:80 --link mysql55:mysql -d synomi/thingspeak
     container_name: thingspeak
     restart: unless-stopped
-    image: marcel1691/thingspeak
+    image: synomi/thingspeak
     ports:
-      - '80:3000'
+      - '8080:80'
     links:
       - "mysql55:mysql"
 #    environment:
