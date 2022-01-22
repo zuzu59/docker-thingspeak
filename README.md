@@ -4,7 +4,7 @@ Petit Docker pour faire tourner un serveur Thingspeak très facilement sur ça m
 zf220122.2221
 
 
-# Buts
+## Buts
 Le dépôt de Thingspeak n'est plus à jour depuis 2015 !
 
 Du coup il ne tourne plus sur les nouvelles distributions à cause des nouvelles mises à jour de Ruby. On peut bien essayer de l'installer à la mano avec un veille distrib de Ruby, mais on va avoir alors le problème avec d'autres applications qui voudront un nouveau Ruby.
@@ -16,9 +16,7 @@ Il nous faut deux containers, une pour la DB et un pourl e serveur Thinspeak. Ce
 Et, on peut même le tester en live sur Github avec GITPOD ;-)
 
 
-## Utilisation
-
-# Installation
+## Installation
 Comme cela fonctionne avec Docker, il faut installer en premier Docker sur sa machine !
 
 Pour linux, on peut le faire très facilement ainsi:
@@ -36,10 +34,8 @@ git clone https://github.com/zuzu59/docker-thingspeak.git
 cd docker-thingspeak
 ```
 
-Enfin, on peut le démarrer !
 
-
-# Démarrage
+## Démarrage
 Pour le démarrer il faut simplement faire ceci:
 ```
 ./start.sh
@@ -52,25 +48,25 @@ http://localhost:8080
 Et on aura un joli serveur Thingspeak perso bien à nous sur sa machine :-)
 
 
-# Arrêt
+## Arrêt
 Pour l'arrêter, simplement:
 ```
 ./stop.sh
 ```
 
 
-# Et le compte admin ?
+## Et le compte admin ?
 On peut activer un compte admin avec la commande suivante:
 ```
 ./set_admin.sh
 ```
 
 
-# Quand la machine redémarre ?
+## Quand la machine redémarre ?
 Docker-Compose, va se charger automatiquement de tout redémarrer, si avant le redémarrage de la machine, Thingspeak tournait. Donc c'est tout totomatique ;-)
 
 
-# On nettoie tout au niveau Docker
+## On nettoie tout au niveau Docker
 Si on veut tout enlever au niveau Docker, on peut utiliser ceci:
 ```
 ./purge.sh
