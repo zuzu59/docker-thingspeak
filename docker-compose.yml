@@ -1,32 +1,36 @@
-#zf220105.0100
+#zf220122.1541
+# sources: https://hub.docker.com/r/synomi/thingspeak
 
 version: "3.9"
+
 services:
-  deepstack:
-    container_name: deepstack
+  mysql55:
+  #docker run --name mysql55 -e MYSQL_ROOT_PASSWORD=speak -d mysql:5.5
+    container_name: mysql55
     restart: unless-stopped
-    image: deepquestai/deepstack
+    image: mysql:5.5
     ports:
-      - '55000:5000'
+      - '3306:3306'
     environment:
-      - VISION-DETECTION=True
-      - API-KEY=toto
+      - MYSQL_ROOT_PASSWORD=speak
 #    volumes:
 #      - /Users/robin/Data/pytorch-models:/modelstore/detection
 #      - ./Data/pytorch-models:/modelstore/detection
 
-  deepstack_ui:
-    build: .
-    container_name: deepstack_ui
+
+  thingspeak:
+  #docker run --name thingspeak -p 80:80 --link mysql55:mysql -d synomi/thingspeak
+    container_name: thingspeak
     restart: unless-stopped
-    image: deepstack-ui
-#    image: robmarkcole/deepstack-ui:latest
-    environment: 
-      - DEEPSTACK_IP=deepstack
-      - DEEPSTACK_PORT=5000
-      - DEEPSTACK_API_KEY=toto
-      - DEEPSTACK_TIMEOUT=20
-#      - DEEPSTACK_CUSTOM_MODEL=fire
-      - DEEPSTACK_UI_DEBUG_MODE=True
+    image: synomi/thingspeak
     ports:
-      - '18501:8501'
+      - '80:80'
+    links:
+      - "mysql55:mysql"
+#    environment:
+#      - VISION-DETECTION=True
+#      - API-KEY=toto
+#    volumes:
+#      - /Users/robin/Data/pytorch-models:/modelstore/detection
+#      - ./Data/pytorch-models:/modelstore/detection
+
