@@ -1,44 +1,13 @@
-#zf220122.1839
-# sources: https://hub.docker.com/r/synomi/thingspeak
+#zf220122.2117
+# sources: https://hub.docker.com/r/marcel1691/thingspeak
 
 version: "3.9"
 
 services:
-  mysql55:
-  #docker run --name mysql55 -e MYSQL_ROOT_PASSWORD=speak -d mysql:5.5
-    container_name: mysql55
-    restart: unless-stopped
-    image: mysql:5.5
-    ports:
-      - '3306:3306'
-    environment:
-      - MYSQL_ROOT_PASSWORD=speak
-#    volumes:
-#      - /Users/robin/Data/pytorch-models:/modelstore/detection
-#      - ./Data/pytorch-models:/modelstore/detection
-
-
   thingspeak:
-  #docker run --name thingspeak -p 80:80 --link mysql55:mysql -d synomi/thingspeak
+  #docker run --name thingspeak -p 80:3000 -d marcel1691/thingspeak
     container_name: thingspeak
     restart: unless-stopped
     image: marcel1691/thingspeak
     ports:
-      - '80:3000'
-    links:
-      - "mysql55:mysql"
-#    environment:
-#      - VISION-DETECTION=True
-#      - API-KEY=toto
-#    volumes:
-#      - /Users/robin/Data/pytorch-models:/modelstore/detection
-#      - ./Data/pytorch-models:/modelstore/detection
-
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - 8081:80
-    environment:
-        MYSQL_USER: root
-        PMA_HOST: mysql55
+      - '8080:3000'
