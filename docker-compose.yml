@@ -1,0 +1,32 @@
+#zf220105.0100
+
+version: "3.9"
+services:
+  deepstack:
+    container_name: deepstack
+    restart: unless-stopped
+    image: deepquestai/deepstack
+    ports:
+      - '55000:5000'
+    environment:
+      - VISION-DETECTION=True
+      - API-KEY=toto
+#    volumes:
+#      - /Users/robin/Data/pytorch-models:/modelstore/detection
+#      - ./Data/pytorch-models:/modelstore/detection
+
+  deepstack_ui:
+    build: .
+    container_name: deepstack_ui
+    restart: unless-stopped
+    image: deepstack-ui
+#    image: robmarkcole/deepstack-ui:latest
+    environment: 
+      - DEEPSTACK_IP=deepstack
+      - DEEPSTACK_PORT=5000
+      - DEEPSTACK_API_KEY=toto
+      - DEEPSTACK_TIMEOUT=20
+#      - DEEPSTACK_CUSTOM_MODEL=fire
+      - DEEPSTACK_UI_DEBUG_MODE=True
+    ports:
+      - '18501:8501'
